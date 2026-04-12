@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let i = 1; i <= frameCount; i++) {
             const img = new Image();
             const frameNumber = i.toString().padStart(4, '0');
-            img.src = `assets/video_frames/frame_${frameNumber}.jpg`;
+            img.src = `../assets/video_frames/frame_${frameNumber}.jpg`;
             images.push(img);
         }
     };
