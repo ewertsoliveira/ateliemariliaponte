@@ -97,8 +97,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Ex: assets/video_frames_noiva/frame_0001.jpg
     // ========================================================================
     const FRAME_COUNT = 144;
-    const FOLDER_PATH = "assets/video_frames_noiva/";
-    const FRAME_NAME = "video noiva";
+    const FOLDER_PATH = "assets/video_frames_vestido/";
+    const FRAME_NAME = "frame_";
     const FRAME_EXT = ".jpg";
 
     // Resolução base que o vídeo original tinha

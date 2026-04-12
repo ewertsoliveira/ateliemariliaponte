@@ -39,9 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
         images[0].onload = render;
     }
 
-    // Initial Reveal Animation (Hero Text Only)
-    const heroReveals = document.querySelectorAll('.hero-scrub-container .reveal-up');
-    heroReveals.forEach((el, index) => {
+    // Initial Reveal Animation (Text)
+    const reveals = document.querySelectorAll('.reveal-up');
+    reveals.forEach((el, index) => {
         setTimeout(() => {
             el.classList.add('active');
         }, 100 * index);
@@ -53,8 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
         { opacity: 1, scale: 1, duration: 1.5, ease: "power3.out" }
     );
 
-    // Parallax Effects for Hero Text (Blur Out on Scroll)
-    gsap.to(".hero-scrub-container .reveal-up", {
+    // Parallax Effects for Text (Blur Out on Scroll)
+    gsap.to(".reveal-up", {
         y: -60,
         opacity: 0,
         filter: "blur(15px)",
@@ -62,30 +62,10 @@ document.addEventListener("DOMContentLoaded", () => {
         scrollTrigger: {
             trigger: ".hero-scrub-container",
             start: "top top",
-            end: "15% top",
+            end: "15% top", 
             scrub: true
         }
     });
-
-    // Reveal Animation for generic sections
-    gsap.utils.toArray('section .reveal-up, section .reveal-zoom').forEach(function (elem) {
-        ScrollTrigger.create({
-            trigger: elem,
-            start: "top 85%",
-            onEnter: function () {
-                elem.classList.add('active');
-            }
-        });
-    });
-
-    // Flashlight Effect Function
-    window.updateFlashlight = function (e, card) {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty("--mouse-x", `${x}px`);
-        card.style.setProperty("--mouse-y", `${y}px`);
-    }
 
     // GSAP Scroll Animation
     gsap.to(currentFrame, {
@@ -95,23 +75,10 @@ document.addEventListener("DOMContentLoaded", () => {
             trigger: ".hero-scrub-container",
             start: "top top",
             end: "bottom bottom",
-            scrub: 0,
+            scrub: 0, 
             onUpdate: () => {
                 requestAnimationFrame(render);
             }
         }
     });
-
-    // Add custom keyframe for scroll line
-    const styleSheet = document.createElement("style");
-    styleSheet.innerText = `
-        @keyframes scroll-line {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100%); }
-        }
-        .animate-scroll-line {
-            animation: scroll-line 1.5s cubic-bezier(0.77, 0, 0.175, 1) infinite;
-        }
-    `;
-    document.head.appendChild(styleSheet);
 });
