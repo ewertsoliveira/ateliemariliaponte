@@ -1,0 +1,24 @@
+{
+  "name": "artools",
+  "version": "1.0.0",
+  "description": "Bem-vindo ao repositório das páginas interativas da **Artools** e **Ateliê Marília Ponte**. Este projeto foi completamente refatorado para garantir máxima escalabilidade e organização, seguindo rigorosos padrões de \"production-ready deployments\".",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ewertsoliveira/ateliemariliaponte.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ewertsoliveira/ateliemariliaponte/issues"
+  },
+  "homepage": "https://github.com/ewertsoliveira/ateliemariliaponte#readme",
+  "dependencies": {
+    "heic-convert": "^2.1.0"
+  }
+}

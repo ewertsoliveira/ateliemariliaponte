@@ -1,0 +1,357 @@
+﻿<!DOCTYPE html>
+<html class="scroll-smooth" lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>quando o sonho encontra a realidade | Exclusivity</title>
+    <meta name="description"
+        content="Da primeira conversa &#224; &#250;ltima prova,<br>eu te guio em cada escolha, at&#233; construir o<br>vestido sob medida que traduz quem voc&#234; &#233;. Serviço premium de locação de vestidos de noiva." />
+
+    <!-- Fonts: Inter for styling body/sans-serif, Space Grotesk for Headings, JetBrains para detalhes em Mono -->
+    <!-- TODO: Inserir kit Adobe Fonts Versailles LT Std ex: <link rel="stylesheet" href="https://use.typekit.net/SEU-KIT-ID.css"> --><style>@font-face{font-family:"Versailles LT Std";src:url("assets/fonts/versailles-bold.woff2")format("woff2");font-weight:700;font-display:swap;}/* TODO: adicionar src woff quando disponivel */</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS (Framework CSS leve para layout responsivo flexível e rápido, importado do Design System) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Iconify (Fornece SVGs leves e esteticamente compatíveis com as micro-interações dos botões) -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+    <!-- GSAP & ScrollTrigger (Escolha OBRIGATÓRIA para Parallax performático amarrado ao scroll, idêntico à referência) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script>
+        // Integração direta do Tema do Design System para garantir consistência visual no Tailwind
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        stone: {
+                            50: '#fafaf9',
+                            100: '#f5f5f4',
+                            200: '#e7e5e4',
+                            300: '#d6d3d1',
+                            400: '#a8a29e',
+                            500: '#78716c',
+                            600: '#57534e',
+                            700: '#44403c',
+                            800: '#292524',
+                            900: '#1c1917',
+                        },
+                        'surface-light': '#EAEAE5',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="css/main3.css">
+</head>
+
+<body class="antialiased min-h-screen relative selection:bg-stone-800 selection:text-white">
+
+    <!-- HERO SECTION com container estendido para permitir o Scrub Parallax -->
+    <main class="hero-scrub-container relative bg-stone-50">
+
+        <!-- Sticky Track que estabiliza o conteúdo na tela enquanto ocorre a descida de 600vh -->
+        <div class="sticky top-0 h-screen w-full overflow-hidden">
+
+            <!-- CANVAS CENTERPIECE (Image Sequence Substituto do Vídeo) -->
+            <div class="absolute inset-0 z-0 flex items-center justify-center bg-stone-100 ">
+                <canvas id="hero-canvas"
+                    class="w-full h-full object-cover mix-blend-multiply opacity-90 transition-opacity duration-1000">
+                </canvas>
+            </div>
+
+            <!-- OVERLAY CONTENT (Text Layer sobrepondo o vídeo) -->
+            <div
+                class="relative z-10 w-full h-full max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 pointer-events-none items-center h-screen ">
+
+                <!-- ÁREA ESQUERDA: Lettering, Estrutura em 3 linhas e Botões CTA -->
+                <section
+                    class="col-span-1 md:col-span-10 lg:col-span-7 flex flex-col z-10 text-left pointer-events-auto px-6 md:px-24"
+                    aria-label="Introdução do serviço">
+
+                    <!-- Linha Decorativa com classe Mono -->
+                    <div class="inline-flex items-center gap-3 mb-3 hero-fade">
+                        <span class="w-1.5 h-1.5 rounded-full" style="background-color:#3F4952"></span>
+                        <span class="text-xs font-mono uppercase tracking-[0.2em]" style="color:#3F4952">Ateliê Marília Ponte</span>
+                    </div>
+
+                    <!-- Lettering exato de 3 linhas com fonte Display e kerning/tracking adaptados -->
+                    <h1
+                        class="font-display text-[1.6rem] sm:text-[2rem] lg:text-[2.6rem] xl:text-[3rem] font-bold tracking-tight leading-[1.15] mb-8">
+                        <div class="reveal-up delay-100 block" style="color:#1A1A1A">Existe uma noiva em voc&#234;.</div>
+                        <div class="reveal-up delay-200 block mt-2 sm:mt-4 leading-[1.2] items-start">
+                            <span style="background-color:#111; color:#FFFFFF; -webkit-box-decoration-break:clone; box-decoration-break:clone; padding:0 0.25em; border-radius:0;">Eu a traduzo num vestido feito para ela.</span>
+                        </div>
+                    </h1>
+
+                    <!-- Descrição Elegante e Não Agressiva -->
+                    <p
+                        class="text-lg md:text-xl leading-relaxed reveal-up delay-500 mb-10 font-normal max-w-lg" style="color:#3F4952">
+                        Da primeira conversa &#224; &#250;ltima prova,<br>eu te guio em cada escolha, at&#233; construir o<br>vestido sob medida que traduz quem voc&#234; &#233;.
+                    </p>
+
+                    <!-- CTAs Primário e Secundário com animação de flutuação no hover -->
+                    <div class="flex flex-col sm:flex-row gap-4 reveal-up delay-700">
+                        <!-- CTA Primário (Dark) -->
+                        <button
+                            class="group relative px-8 py-4 text-white overflow-hidden shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color:#111;border-radius:9999px">
+                            <span class="relative z-10 text-sm font-medium tracking-wide">Agendar consulta</span>
+                        </button>
+
+                        <!-- CTA Secundário (Light + Icon) -->
+                        <button
+                            class="group px-8 py-4 transition-all hover:-translate-y-1 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background:transparent;border:1px solid #C9D2DB;color:#E5EBEF;border-radius:9999px">
+                            <span class="text-sm font-medium tracking-wide">Ver modelos</span>
+                            <iconify-icon icon="solar:arrow-right-linear"
+                                class="group-hover:translate-x-1 transition-transform" style="color:#d8f0ff"></iconify-icon>
+                        </button>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- RIGHT SIDE CONTROLS (Identico à referência visual do original) -->
+            <div
+                class="absolute right-8 top-1/2 -translate-y-1/2  flex-col items-center gap-4 z-30 mix-blend-darken text-stone-500">
+                <div class="text-[10px] font-mono tracking-widest" style="color:#3F4952">01</div>
+                <div class="w-px h-12 bg-stone-400"></div>
+            </div>
+
+            <!-- SCROLL HINT (Removido a pedido do cliente) -->
+
+            <!-- Gradient Fade to Next Section (Transição suave) -->
+            <div
+                class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-stone-50 to-transparent pointer-events-none z-10">
+            </div>
+        </div>
+    </main>
+
+    <!-- SEGUNDA DOBRA: A EXPERIÊNCIA (Layout Tech Docs adaptado para Premium Bridal) -->
+    <section class="py-24 lg:py-40 relative bg-stone-50 overflow-hidden" id="section-experience">
+
+        <!-- Background Text (Inspirado no "PRECISION" gigante de fundo na ref.) -->
+        <div class="absolute top-10 left-1/2 -translate-x-1/2 w-full text-center z-0 select-none pointer-events-none">
+            <h2
+                class="font-display font-bold text-[6rem] sm:text-[10rem] lg:text-[16rem] text-stone-200/40 tracking-tighter leading-none whitespace-nowrap">
+                ESSÊNCIA
+            </h2>
+        </div>
+
+        <div class="max-w-[1440px] mx-auto px-6 md:px-24 relative z-10">
+
+            <!-- TOP HEADER LOGIC -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-8 lg:mb-10">
+                <div class="lg:col-span-12 flex flex-col justify-end">
+
+                    <div class="inline-flex items-center gap-3 mb-6 reveal-up">
+                        <span class="w-1.5 h-1.5 rounded-full" style="background-color:#3F4952"></span>
+                        <span class="text-xs font-mono uppercase tracking-[0.2em]" style="color:#3F4952">A Experiência</span>
+                    </div>
+
+                    <h2
+                        class="font-display text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1] mb-8 text-stone-900 reveal-up delay-100">
+                        Quando o Vestido <br class="hidden sm:block">Encontra a Mulher.
+                    </h2>
+
+                    <p class="text-[17px] text-stone-500 leading-relaxed max-w-3xl font-light reveal-up delay-200">
+                        Aqui, a gente não vende vestidos. A gente cria encontros. Encontros entre sua personalidade e a
+                        modelagem perfeita. Entre seu sonho e a técnica que o torna real. Porque um vestido que não
+                        reflete quem você é não é um vestido — é um disfarce. E você merece mais do que isso.
+                    </p>
+                </div>
+            </div>
+
+            <!-- BOTTOM CONTENT: VIDEO BLOCK + LIST -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start pt-0">
+
+                <!-- ÁREA ESQUERDA: VÍDEO LOOP EM DESTAQUE -->
+                <div class="lg:col-span-6 w-full relative reveal-up delay-300">
+                    <div class="rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-700 relative bg-stone-100">
+                        <video class="w-full h-full object-cover aspect-[4/3] lg:aspect-[4/3] scale-[1.03]" autoplay loop muted playsinline>
+                            <source src="assets/raw_files/video-atelie1.mp4" type="video/mp4">
+                            Seu navegador não suporta a visualização deste vídeo.
+                        </video>
+                    </div>
+                </div>
+
+                <!-- ÁREA DIREITA: LISTA 01 02 03 -->
+                <div class="lg:col-span-6 flex flex-col gap-2 pt-4 lg:pt-0">
+
+                    <!-- Item 01 -->
+                    <div class="flex gap-4 sm:gap-6 reveal-up delay-400 p-6 sm:p-8 rounded-3xl transition-all duration-500 hover:bg-white hover:shadow-xl hover:-translate-y-1 cursor-default group">
+                        <div class="text-[10px] font-mono text-stone-400 font-medium tracking-widest mt-1 group-hover:text-stone-900 transition-colors">01</div>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-display font-medium text-stone-900 mb-4 tracking-tight">
+                                O Diálogo
+                            </h3>
+                            <div class="border-l border-stone-200 group-hover:border-stone-900 transition-colors pl-4">
+                                <p class="text-stone-500 leading-relaxed font-light text-[15px]">
+                                    No Ateliê Marília Ponte, cada detalhe é uma conversa. Cada escolha é uma decisão sua.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 02 -->
+                    <div class="flex gap-4 sm:gap-6 reveal-up delay-500 p-6 sm:p-8 rounded-3xl transition-all duration-500 hover:bg-white hover:shadow-xl hover:-translate-y-1 cursor-default group">
+                        <div class="text-[10px] font-mono text-stone-400 font-medium tracking-widest mt-1 group-hover:text-stone-900 transition-colors">02</div>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-display font-medium text-stone-900 mb-4 tracking-tight">
+                                A Leveza
+                            </h3>
+                            <div class="border-l border-stone-200 group-hover:border-stone-900 transition-colors pl-4">
+                                <p class="text-stone-500 leading-relaxed font-light text-[15px]">
+                                    Cada momento do processo é leve, descontraído, seguro. Sem surpresas desagradáveis. Sem prazos que te deixam acordada à noite.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 03 -->
+                    <div class="flex gap-4 sm:gap-6 reveal-up delay-600 p-6 sm:p-8 rounded-3xl transition-all duration-500 hover:bg-white hover:shadow-xl hover:-translate-y-1 cursor-default group">
+                        <div class="text-[10px] font-mono text-stone-400 font-medium tracking-widest mt-1 group-hover:text-stone-900 transition-colors">03</div>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-display font-medium text-stone-900 mb-4 tracking-tight">
+                                A Protagonista
+                            </h3>
+                            <div class="border-l border-stone-200 group-hover:border-stone-900 transition-colors pl-4">
+                                <p class="text-stone-500 leading-relaxed font-light text-[15px]">
+                                    Sem aquela sensação de que você é apenas mais um número. Porque quando você investe em um vestido para o dia mais importante da sua vida, você não quer apenas qualidade impecável. Você quer sentir-se vista.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SEÇÃO 3: A JORNADA / TIMELINE -->
+    <section class="py-24 lg:py-32 relative bg-stone-50 overflow-hidden" id="section-journey">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-12">
+            
+            <!-- HEADER -->
+            <div class="text-center mb-24 reveal-up">
+                <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-stone-900 mb-6">
+                    Dos sonhos ao altar
+                </h2>
+                <p class="text-lg text-stone-500 max-w-2xl mx-auto font-light">
+                    Cada detalhe da história do seu vestido importa
+                </p>
+            </div>
+
+            <!-- PINNED TRACKER CONTAINER -->
+            <!-- Uma altura que garante que o pin englobe todo o layout confortavelmente -->
+            <div class="relative w-full mx-auto min-h-[70vh] flex items-center justify-center journey-pin-container py-10">
+                
+                <!-- THE LINE (Center in PC, Left in Mobile) -->
+                <div class="absolute left-[16px] md:left-1/2 top-10 bottom-10 w-[1px] bg-stone-200 -translate-x-1/2 md:translate-x-0">
+                    <!-- The Fill Line -->
+                    <div class="journey-line-fill absolute top-0 left-0 w-full h-full bg-stone-900 origin-top scale-y-0"></div>
+                </div>
+
+                <!-- CHAPTERS WRAPPER -->
+                <div class="w-full relative flex flex-col justify-between h-full gap-8 md:gap-0">
+
+                    <!-- Chapter 1 (Left Desktop) -->
+                    <div class="journey-step relative flex justify-start w-full md:w-1/2 opacity-0 translate-y-10">
+                        <div class="journey-dot absolute left-[16px] md:left-auto md:-right-[6px] top-12 w-3 h-3 rounded-full bg-stone-200 border-2 border-stone-50 z-10 transition-colors duration-500 -translate-x-1/2 md:translate-x-0"></div>
+                        <div class="bg-white border border-stone-100 rounded-3xl p-8 lg:p-10 shadow-sm ml-12 md:ml-0 md:mr-16 w-full hover:shadow-lg transition-all duration-500">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex flex-col gap-1">
+                                    <span class="text-xs font-mono uppercase tracking-widest text-stone-500">Capítulo 1</span>
+                                    <h3 class="text-2xl font-display font-medium text-stone-900 tracking-tight">A Descoberta</h3>
+                                </div>
+                                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-stone-100 text-stone-900 shrink-0">
+                                    <iconify-icon icon="solar:clock-circle-linear" class="text-2xl"></iconify-icon>
+                                </span>
+                            </div>
+                            <p class="text-[15px] text-stone-500 leading-relaxed font-light">
+                                Você marca sua consulta — presencial no meu ateliê ou à distância. Atendimento exclusivo, sem pressa, sem filas. Conversamos sobre seus sonhos, sua personalidade, seu estilo. Você traz referências. Eu faço perguntas que ninguém faz. Porque não é sobre o vestido — é sobre você.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 2 (Right Desktop) -->
+                    <div class="journey-step relative flex justify-end w-full md:w-1/2 md:ml-auto opacity-0 translate-y-10">
+                        <div class="journey-dot absolute left-[16px] md:left-auto md:-left-[6px] top-12 w-3 h-3 rounded-full bg-stone-200 border-2 border-stone-50 z-10 transition-colors duration-500 -translate-x-1/2 md:translate-x-0"></div>
+                        <div class="bg-white border border-stone-100 rounded-3xl p-8 lg:p-10 shadow-sm ml-12 md:ml-16 md:mr-0 w-full hover:shadow-lg transition-all duration-500">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex flex-col gap-1">
+                                    <span class="text-xs font-mono uppercase tracking-widest text-stone-500">Capítulo 2</span>
+                                    <h3 class="text-2xl font-display font-medium text-stone-900 tracking-tight">A Magia Acontece</h3>
+                                </div>
+                                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-stone-100 text-stone-900 shrink-0">
+                                    <iconify-icon icon="solar:ruler-pen-linear" class="text-2xl"></iconify-icon>
+                                </span>
+                            </div>
+                            <p class="text-[15px] text-stone-500 leading-relaxed font-light">
+                                Modelagem no corpo. Você visualiza o vestido concretamente. Você vê a transformação em tempo real. Sem imaginação, sem ansiedade. Apenas realidade.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 3 (Left Desktop) -->
+                    <div class="journey-step relative flex justify-start w-full md:w-1/2 opacity-0 translate-y-10">
+                        <div class="journey-dot absolute left-[16px] md:left-auto md:-right-[6px] top-12 w-3 h-3 rounded-full bg-stone-200 border-2 border-stone-50 z-10 transition-colors duration-500 -translate-x-1/2 md:translate-x-0"></div>
+                        <div class="bg-white border border-stone-100 rounded-3xl p-8 lg:p-10 shadow-sm ml-12 md:ml-0 md:mr-16 w-full hover:shadow-lg transition-all duration-500">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex flex-col gap-1">
+                                    <span class="text-xs font-mono uppercase tracking-widest text-stone-500">Capítulo 3</span>
+                                    <h3 class="text-2xl font-display font-medium text-stone-900 tracking-tight">O Acompanhamento</h3>
+                                </div>
+                                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-stone-100 text-stone-900 shrink-0">
+                                    <iconify-icon icon="solar:calendar-date-linear" class="text-2xl"></iconify-icon>
+                                </span>
+                            </div>
+                            <p class="text-[15px] text-stone-500 leading-relaxed font-light">
+                                Você sabe exatamente como tudo está progredindo. Sem surpresas. Sem silêncio. Apenas segurança e transparência em cada etapa.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 4 (Right Desktop) -->
+                    <div class="journey-step relative flex justify-end w-full md:w-1/2 md:ml-auto opacity-0 translate-y-10">
+                        <div class="journey-dot absolute left-[16px] md:left-auto md:-left-[6px] top-12 w-3 h-3 rounded-full bg-stone-200 border-2 border-stone-50 z-10 transition-colors duration-500 -translate-x-1/2 md:translate-x-0"></div>
+                        <div class="bg-white border border-stone-100 rounded-3xl p-8 lg:p-10 shadow-sm ml-12 md:ml-16 md:mr-0 w-full hover:shadow-lg transition-all duration-500">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex flex-col gap-1">
+                                    <span class="text-xs font-mono uppercase tracking-widest text-stone-500">Capítulo 4</span>
+                                    <h3 class="text-2xl font-display font-medium text-stone-900 tracking-tight">O Desfecho</h3>
+                                </div>
+                                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-stone-100 text-stone-900 shrink-0">
+                                    <iconify-icon icon="solar:magic-stick-3-linear" class="text-2xl"></iconify-icon>
+                                </span>
+                            </div>
+                            <p class="text-[15px] text-stone-500 leading-relaxed font-light">
+                                O vestido chega e você se vê no espelho. A magia é real e o sonho virou verdade. Você vê o reflexo da mulher que sempre quis ser. O seu feliz para sempre começa agora.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/index3.js"></script>
+</body>
+
+</html>

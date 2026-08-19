@@ -1,0 +1,44 @@
+﻿/* BASE STYLES importados do Design System */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #EAEAE5;
+    color: #1C1917;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* TEXT OUTLINE (Implementa o requisito visual exato para a palavra "sonho") */
+.text-outline {
+    -webkit-text-stroke: 1.5px #1C1917;
+    color: transparent;
+    transition: all 0.5s ease;
+}
+
+/* Reveal Animations (Slide in Suave) combinadas com Blur para Entrada Premium */
+.reveal-up {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(10px);
+    will-change: transform, opacity, filter;
+    transition: all 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-up.active {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+/* Container do Hero que permite a rolagem necessária para ativar o ScrollTrigger do Vídeo. 300vh = 3 telas mecânicas de distância. */
+.hero-scrub-container {
+    height: 350vh;
+}
+
+/* Box Shadow refinada para assegurar efeito de profundidade elegante no container do vídeo */
+.video-container {
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
