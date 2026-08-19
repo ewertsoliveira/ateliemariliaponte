@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html class="scroll-smooth" lang="pt-BR">
 
 <head>
@@ -58,6 +58,13 @@
     <link rel="stylesheet" href="css/main3.css">
 
     <style>
+        /* Ajuste Base (equivalente a 80% de zoom) sem quebrar o GSAP */
+        @media (min-width: 1024px) {
+            html {
+                font-size: 80%; /* Reduz a base do Tailwind (rem) proporcionalmente */
+            }
+        }
+
         /* ====== SEÇÕES NOVAS — index4 ====== */
 
         /* FAQ Accordion */
@@ -221,7 +228,7 @@
         <!-- Background Text -->
         <div class="absolute top-10 left-1/2 -translate-x-1/2 w-full text-center z-0 select-none pointer-events-none">
             <h2 class="font-display font-bold text-[5rem] sm:text-[8rem] lg:text-[14rem] tracking-tighter leading-none whitespace-nowrap" style="color:rgba(116,131,156,0.07)">
-                ESCOLHA
+                CAMINHOS
             </h2>
         </div>
 
@@ -229,19 +236,19 @@
 
             <!-- TOP HEADER LOGIC -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-12 lg:mb-16">
-                <div class="lg:col-span-12 flex flex-col justify-end text-center lg:text-left">
+                <div class="lg:col-span-12 flex flex-col justify-center text-center">
 
-                    <div class="inline-flex items-center justify-center lg:justify-start gap-3 mb-6 reveal-up">
+                    <div class="inline-flex items-center justify-center gap-3 mb-6 reveal-up">
                         <span class="w-1.5 h-1.5 rounded-full" style="background-color:#74839C"></span>
-                        <span class="text-xs font-mono uppercase tracking-[0.2em]" style="color:#74839C">O Dilema</span>
+                        <span class="text-xs font-mono uppercase tracking-[0.2em]" style="color:#74839C">AS TRÊS OPÇÕES</span>
                     </div>
 
-                    <h2 class="font-display text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1] mb-8 reveal-up delay-100 mx-auto lg:mx-0" style="color:#1A1A1A">
-                        Você salvou dezenas de vestidos.<br class="hidden sm:block"> E ainda não sabe qual é o seu.
+                    <h2 class="font-display text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1] mb-8 reveal-up delay-100 mx-auto" style="color:#1A1A1A">
+                        Três possibilidades<br class="hidden sm:block"> até o vestido do seu dia.
                     </h2>
 
-                    <p class="text-[17px] leading-relaxed max-w-3xl font-light reveal-up delay-200 mx-auto lg:mx-0" style="color:#3F4952">
-                        Cada foto puxa para um lado. Um decote que você amou numa imagem, um caimento que te conquistou em outra, um detalhe que você não sabe nomear mas sabe que quer. Escolher o vestido é a decisão mais simbólica do casamento — e a que mais dá medo de errar.
+                    <p class="text-[17px] leading-relaxed max-w-3xl font-light reveal-up delay-200 mx-auto" style="color:#3F4952">
+                        Não existe um único caminho até o vestido certo. Existem três. Vamos descobrir juntas, qual é o seu.
                     </p>
                 </div>
             </div>
@@ -267,11 +274,11 @@
                         <div class="text-[10px] font-mono font-medium tracking-widest mt-1 text-[#74839C] group-hover:text-[#1A1A1A] transition-colors">01</div>
                         <div>
                             <h3 class="text-xl sm:text-2xl font-display font-medium text-[#1A1A1A] mb-4 tracking-tight">
-                                O excesso
+                                Primeiro aluguel - Sob medida
                             </h3>
                             <div class="border-l border-[#E2E7EB] group-hover:border-[#1A1A1A] transition-colors pl-4">
                                 <p class="text-[#3F4952] leading-relaxed font-light text-[15px]">
-                                    Dezenas de referências salvas, e nenhuma delas parece completa. Um decote que você amou numa foto, um caimento que te conquistou em outra. Quanto mais você olha, menos sabe o que quer.
+                                    O vestido nasce do zero, a partir das suas referências e do seu corpo. Criação do conceito, modelagem própria e provas até o caimento estar exato. Para quem quer um vestido que ninguém mais vai ter.
                                 </p>
                             </div>
                         </div>
@@ -282,11 +289,11 @@
                         <div class="text-[10px] font-mono font-medium tracking-widest mt-1 text-[#74839C] group-hover:text-[#1A1A1A] transition-colors">02</div>
                         <div>
                             <h3 class="text-xl sm:text-2xl font-display font-medium text-[#1A1A1A] mb-4 tracking-tight">
-                                A solidão
+                                Locação tradicional - Peça existente do ateliê
                             </h3>
                             <div class="border-l border-[#E2E7EB] group-hover:border-[#1A1A1A] transition-colors pl-4">
                                 <p class="text-[#3F4952] leading-relaxed font-light text-[15px]">
-                                    Todo mundo tem opinião sobre o seu vestido. Sua mãe, sua amiga, o algoritmo. Mas ninguém decide por você — e ninguém entende o que você está tentando dizer quando você mesma não sabe explicar.
+                                    Um vestido já criado por mim, ajustado à sua medida. Você prova, a gente adapta o que precisar, e ele passa pela mesma consultoria e pelo mesmo cuidado do sob medida. Para quem se apaixona por uma peça que já existe.
                                 </p>
                             </div>
                         </div>
@@ -297,11 +304,11 @@
                         <div class="text-[10px] font-mono font-medium tracking-widest mt-1 text-[#74839C] group-hover:text-[#1A1A1A] transition-colors">03</div>
                         <div>
                             <h3 class="text-xl sm:text-2xl font-display font-medium text-[#1A1A1A] mb-4 tracking-tight">
-                                O medo
+                                Civil
                             </h3>
                             <div class="border-l border-[#E2E7EB] group-hover:border-[#1A1A1A] transition-colors pl-4">
                                 <p class="text-[#3F4952] leading-relaxed font-light text-[15px]">
-                                    No fundo, o que assusta não é escolher errado o buffet ou a música. É entrar no dia mais simbólico da sua vida vestindo algo que não parece com você. E não ter como voltar atrás.
+                                    Um vestido para o cartório, o almoço em família, a celebração pequena. Mesmo olhar, mesma modelagem, na escala do seu dia. Porque casar no civil também merece um vestido pensado. Ele pode ser feito sob medida ou locado de uma peça já existente do ateliê também.
                                 </p>
                             </div>
                         </div>
@@ -441,18 +448,26 @@
     <!-- SEÇÃO 4 — CARROSSEL DE CASES (Noivas)                           -->
     <!-- ================================================================ -->
     <section class="py-24 lg:py-32 relative overflow-hidden" id="section-cases" style="background-color:#F8F9FA">
+        
+        <!-- Background Text -->
+        <div class="absolute top-10 left-1/2 -translate-x-1/2 w-full text-center z-0 select-none pointer-events-none">
+            <h2 class="font-display font-bold text-[5rem] sm:text-[8rem] lg:text-[14rem] tracking-tighter leading-none whitespace-nowrap" style="color:rgba(116,131,156,0.07)">
+                PORTFÓLIO
+            </h2>
+        </div>
+
         <div class="max-w-[1200px] mx-auto px-6 md:px-12 relative z-10">
             
             <!-- HEADER -->
-            <div class="mb-16 md:mb-24 reveal-up text-center md:text-left">
-                <div class="inline-flex items-center gap-3 mb-6">
+            <div class="mb-16 md:mb-24 reveal-up text-center">
+                <div class="inline-flex items-center justify-center gap-3 mb-6">
                     <span class="w-1.5 h-1.5 rounded-full" style="background-color:#74839C"></span>
                     <span class="text-xs font-mono uppercase tracking-[0.2em]" style="color:#74839C">Portfólio</span>
                 </div>
-                <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4" style="color:#1A1A1A">
+                <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4 mx-auto" style="color:#1A1A1A">
                     Elas chegaram sem saber explicar.
                 </h2>
-                <p class="text-lg max-w-2xl font-light mx-auto md:mx-0" style="color:#3F4952">
+                <p class="text-lg max-w-2xl font-light mx-auto" style="color:#3F4952">
                     Três noivas, três vestidos que não poderiam ser de mais ninguém.
                 </p>
             </div>
@@ -612,7 +627,7 @@
             <div class="w-full flex-shrink-0 snap-center mobile-journey-slide flex flex-col items-center">
                 <img src="assets/images/proval final ajustando vestido 2.jpg" alt="Prova final" class="w-full h-auto object-contain rounded-2xl shadow-sm mb-4" loading="lazy">
                 <p class="text-[16px] font-light text-center px-2" style="color:#3F4952">
-                    Prova final. Aqui eu testo tudo: sentar, levantar o braço, andar. O que falhar, falha agora.
+                    Prova final. Aqui eu testo tudo: sentar, levantar o braço, andar. Um vestido tem que funcionar em movimento, não só na foto.
                 </p>
             </div>
 
@@ -620,7 +635,7 @@
             <div class="w-full flex-shrink-0 snap-center mobile-journey-slide flex flex-col items-center">
                 <img src="assets/images/vestido pronto casamento.jpg" alt="O dia" class="w-full h-auto object-contain rounded-2xl shadow-sm mb-4" loading="lazy">
                 <p class="text-[16px] font-light text-center px-2" style="color:#3F4952">
-                    No altar, nada para ajeitar. Só você.
+                    Do algodão cru ao altar. Agora é com você.
                 </p>
             </div>
 
@@ -687,7 +702,7 @@
                     <div class="slide-caption opacity-0 transition-all duration-700 transform translate-y-4 text-center lg:text-left">
                         <span class="text-sm font-mono tracking-widest text-[#74839C] mb-3 block">04</span>
                         <p class="text-2xl lg:text-3xl font-light text-[#1A1A1A] leading-snug">
-                            Prova final. Aqui eu testo tudo: sentar, levantar o braço, andar. O que falhar, falha agora.
+                            Prova final. Aqui eu testo tudo: sentar, levantar o braço, andar. Um vestido tem que funcionar em movimento, não só na foto.
                         </p>
                     </div>
                 </div>
@@ -700,7 +715,7 @@
                     <div class="slide-caption opacity-0 transition-all duration-700 transform translate-y-4 text-center lg:text-left">
                         <span class="text-sm font-mono tracking-widest text-[#74839C] mb-3 block">05</span>
                         <p class="text-2xl lg:text-3xl font-light text-[#1A1A1A] leading-snug">
-                            No altar, nada para ajeitar. Só você.
+                            Do algodão cru ao altar. Agora é com você.
                         </p>
                     </div>
                 </div>
@@ -957,7 +972,7 @@
         <div class="max-w-[1440px] mx-auto px-6 md:px-24 flex flex-col sm:flex-row justify-between items-center gap-4">
             <div class="flex flex-col items-center sm:items-start">
                 <span class="font-display text-lg font-medium tracking-tight" style="color:#C4CDD6">Marília Ponte</span>
-                <span class="text-xs font-mono uppercase tracking-[0.2em] mt-1" style="color:#8A929B">Vestidos de noiva sob medida</span>
+                <span class="text-xs font-mono uppercase tracking-[0.2em] mt-1" style="color:#8A929B">Vestidos de noiva</span>
             </div>
             <p class="text-xs" style="color:#8A929B">&copy; 2026 Todos os direitos reservados.</p>
         </div>
