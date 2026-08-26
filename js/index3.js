@@ -165,6 +165,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 proxy.frame = Math.min(Math.max(frame, 0), FRAME_COUNT - 1);
                 requestAnimationFrame(render);
 
+                // Panning dinâmico no mobile via objectPosition inline (sobrescreve a classe CSS)
+                if (window.innerWidth < 768) {
+                    if (progress <= CROQUI_SCROLL_SHARE) {
+                        // Cena 1 (Croqui): desliza para a direita (65% → 80%)
+                        const localProg = progress / CROQUI_SCROLL_SHARE;
+                        const pos = 65 + (localProg * 15);
+                        canvas.style.objectPosition = `${pos}% center`;
+                    } else {
+                        // Cena 2+3: desliza suavemente para centralizar o rosto da noiva
+                        const noivaProg = (progress - CROQUI_SCROLL_SHARE) / (1 - CROQUI_SCROLL_SHARE);
+                        // De 80% (onde croqui terminou) até 50% (rosto centralizado)
+                        const pos = 80 - (noivaProg * 30);
+                        canvas.style.objectPosition = `${pos}% center`;
+                    }
+                }
+
                 // Fade in the white gradient during the last 10% of the scroll
                 const fadeEl = document.getElementById("hero-gradient-fade");
                 if (fadeEl) {
