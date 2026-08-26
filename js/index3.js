@@ -165,19 +165,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 proxy.frame = Math.min(Math.max(frame, 0), FRAME_COUNT - 1);
                 requestAnimationFrame(render);
 
-                // Panning dinâmico no mobile via objectPosition inline (sobrescreve a classe CSS)
+                // Panning e Zoom dinâmico no mobile
                 if (window.innerWidth < 768) {
                     if (progress <= CROQUI_SCROLL_SHARE) {
-                        // Cena 1 (Croqui): desliza para a direita (63.5% → 78.5%)
+                        // Cena 1 (Croqui): desliza para a direita (63.5% → 78.5%), mantém zoom de 1.4
                         const localProg = progress / CROQUI_SCROLL_SHARE;
                         const pos = 63.5 + (localProg * 15);
                         canvas.style.objectPosition = `${pos}% center`;
+                        canvas.style.transform = `scale(1.4)`;
                     } else {
-                        // Cena 2+3: desliza suavemente para centralizar o rosto da noiva
+                        // Cena 2+3: desliza para centralizar a noiva e reduz o zoom rapidamente para abrir o plano na Cena 2
                         const noivaProg = (progress - CROQUI_SCROLL_SHARE) / (1 - CROQUI_SCROLL_SHARE);
-                        // De 78.5% (onde croqui terminou) até 50% (rosto centralizado)
+                        // Posição: 78.5% -> 50%
                         const pos = 78.5 - (noivaProg * 28.5);
                         canvas.style.objectPosition = `${pos}% center`;
+                        // Zoom: afasta rápido de 1.4 para 1.0 logo no começo da Cena 2
+                        const currentScale = Math.max(1.0, 1.4 - (noivaProg * 1.2));
+                        canvas.style.transform = `scale(${currentScale})`;
                     }
                 }
 
