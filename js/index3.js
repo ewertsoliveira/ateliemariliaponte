@@ -1,4 +1,4 @@
-﻿// 1. Instanciar GSAP e ScrollTrigger
+// 1. Instanciar GSAP e ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -96,9 +96,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Para atualizar, mude o FRAME_COUNT e garanta que as imagens estejam numeradas
     // Ex: assets/video_frames_noiva/frame_0001.jpg
     // ========================================================================
-    const FRAME_COUNT = 96;
-    const FOLDER_PATH = "assets/Video_frames_vestido_2/";
-    const FRAME_NAME = "frame_";
+    const FRAME_COUNT = 160;
+    const FOLDER_PATH = "assets/sequencia/";
+    const FRAME_NAME = "Sequência 01";
     const FRAME_EXT = ".jpg";
 
     // Resolução base que o vídeo original tinha
@@ -119,14 +119,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // Pré-carregamento dinâmico adaptado para os novos arquivos (000 até 143)
     // Desenha o frame_001 imediatamente ao carregar a página (evita canvas branco)
     const firstFrame = new Image();
-    firstFrame.src = `${FOLDER_PATH}${FRAME_NAME}001${FRAME_EXT}`;
+    firstFrame.src = `${FOLDER_PATH}${FRAME_NAME}000${FRAME_EXT}`;
     firstFrame.onload = () => {
         ctx.drawImage(firstFrame, 0, 0, canvas.width, canvas.height);
     };
 
     for (let i = 0; i < FRAME_COUNT; i++) {
         const img = new Image();
-        const frameNumber = (i + 1).toString().padStart(3, '0');
+        const frameNumber = i.toString().padStart(3, '0');
         img.src = `${FOLDER_PATH}${FRAME_NAME}${frameNumber}${FRAME_EXT}`;
 
         img.onload = () => {
@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Frames do croqui (0-24): recebem 70% do scroll → animação lenta e detalhada
     // Frames da noiva (25-95): recebem 30% do scroll → velocidade normal
     const CROQUI_END_FRAME = 25;    // último frame do croqui (0-indexado)
-    const CROQUI_SCROLL_SHARE = 0.60; // croqui=210vh (60%), noiva=140vh (40%) // 70% do scroll para o croqui
+    const CROQUI_SCROLL_SHARE = 0.30; // croqui=150vh (30%), noiva=350vh (70%)
 
     gsap.to({}, {
         scrollTrigger: {
@@ -164,6 +164,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 proxy.frame = Math.min(Math.max(frame, 0), FRAME_COUNT - 1);
                 requestAnimationFrame(render);
+
+                // Fade in the white gradient during the last 10% of the scroll
+                const fadeEl = document.getElementById("hero-gradient-fade");
+                if (fadeEl) {
+                    if (progress > 0.90) {
+                        fadeEl.style.opacity = (progress - 0.90) * 10;
+                    } else {
+                        fadeEl.style.opacity = 0;
+                    }
+                }
             }
         }
     });

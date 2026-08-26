@@ -1,4 +1,4 @@
-﻿/* BASE STYLES importados do Design System */
+/* BASE STYLES importados do Design System */
 body {
     font-family: 'Inter', sans-serif;
     background-color: #EAEAE5;
@@ -31,7 +31,7 @@ body {
 
 /* Container do Hero que permite a rolagem necessária para ativar o ScrollTrigger do Vídeo. 300vh = 3 telas mecânicas de distância. */
 .hero-scrub-container {
-    height: 350vh;
+    height: 600vh;
 }
 
 /* Box Shadow refinada para assegurar efeito de profundidade elegante no container do vídeo */
