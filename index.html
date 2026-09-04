@@ -145,15 +145,94 @@
             box-shadow: 0 20px 40px -15px rgba(0,0,0,0.06);
             transform: translateY(-2px);
         }
+
+        /* Floating Glass Pill Navbar */
+        #site-navbar {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #site-navbar.nav-scrolled nav {
+            background-color: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.1);
+            border-color: rgba(226, 231, 235, 0.9);
+        }
+        .nav-link.active-nav {
+            background-color: #f5f5f4 !important;
+            color: #1A1A1A !important;
+            font-weight: 600 !important;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 
 <body class="antialiased min-h-screen relative selection:bg-stone-800 selection:text-white">
 
     <!-- ================================================================ -->
+    <!-- FLOATING GLASS PILL NAVBAR                                       -->
+    <!-- ================================================================ -->
+    <header id="site-navbar" class="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-[1020px]">
+        <nav class="relative flex items-center justify-between px-4 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white/85 backdrop-blur-md border border-stone-200/80 shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all">
+            
+            <!-- Brand / Logo -->
+            <a href="#home" class="flex items-center gap-2.5 group select-none">
+                <span class="w-2 h-2 rounded-full bg-[#111] group-hover:scale-125 transition-transform"></span>
+                <span class="font-display font-medium text-sm sm:text-base tracking-tight text-[#1A1A1A]">
+                    Marília Ponte
+                </span>
+                <span class="hidden sm:inline-block text-[10px] font-mono uppercase tracking-[0.2em] text-[#74839C] border-l border-stone-300 pl-2.5">
+                    Ateliê
+                </span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <div class="hidden lg:flex items-center gap-1">
+                <a href="#section-pain" class="nav-link text-[13px] font-sans font-normal text-[#3F4952] hover:text-[#1A1A1A] px-3.5 py-1.5 rounded-full hover:bg-stone-100/80 transition-all">Caminhos</a>
+                <a href="#section-method" class="nav-link text-[13px] font-sans font-normal text-[#3F4952] hover:text-[#1A1A1A] px-3.5 py-1.5 rounded-full hover:bg-stone-100/80 transition-all">Processo</a>
+                <a href="#section-cases" class="nav-link text-[13px] font-sans font-normal text-[#3F4952] hover:text-[#1A1A1A] px-3.5 py-1.5 rounded-full hover:bg-stone-100/80 transition-all">Noivas</a>
+                <a href="#section-journey-header" class="nav-link text-[13px] font-sans font-normal text-[#3F4952] hover:text-[#1A1A1A] px-3.5 py-1.5 rounded-full hover:bg-stone-100/80 transition-all">Jornada</a>
+                <a href="#section-about" class="nav-link text-[13px] font-sans font-normal text-[#3F4952] hover:text-[#1A1A1A] px-3.5 py-1.5 rounded-full hover:bg-stone-100/80 transition-all">Sobre</a>
+                <a href="#section-faq" class="nav-link text-[13px] font-sans font-normal text-[#3F4952] hover:text-[#1A1A1A] px-3.5 py-1.5 rounded-full hover:bg-stone-100/80 transition-all">Dúvidas</a>
+            </div>
+
+            <!-- CTA & Mobile Toggle -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <a href="#section-cta-final" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-medium tracking-wide text-white bg-[#111] hover:bg-black rounded-full shadow-sm hover:shadow transition-all hover:-translate-y-0.5">
+                    <span>Agendar</span>
+                    <iconify-icon icon="solar:arrow-right-linear" class="text-xs"></iconify-icon>
+                </a>
+
+                <!-- Mobile Hamburger Button -->
+                <button id="mobile-nav-toggle" aria-label="Abrir Menu" class="lg:hidden w-9 h-9 flex items-center justify-center rounded-full text-[#1A1A1A] hover:bg-stone-100 transition-colors">
+                    <iconify-icon icon="solar:hamburger-menu-linear" id="nav-icon-open" class="text-xl"></iconify-icon>
+                    <iconify-icon icon="solar:close-circle-linear" id="nav-icon-close" class="text-xl hidden"></iconify-icon>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-nav-menu" class="hidden lg:hidden mt-2 p-5 rounded-3xl bg-white/95 backdrop-blur-xl border border-stone-200/80 shadow-2xl transition-all duration-300 transform opacity-0 -translate-y-2">
+            <div class="flex flex-col gap-1.5">
+                <a href="#section-pain" class="mobile-nav-link text-[15px] font-display font-medium text-[#1A1A1A] hover:text-[#111] px-4 py-2.5 rounded-2xl hover:bg-stone-100/80 transition-all">01. Caminhos</a>
+                <a href="#section-method" class="mobile-nav-link text-[15px] font-display font-medium text-[#1A1A1A] hover:text-[#111] px-4 py-2.5 rounded-2xl hover:bg-stone-100/80 transition-all">02. Processo</a>
+                <a href="#section-cases" class="mobile-nav-link text-[15px] font-display font-medium text-[#1A1A1A] hover:text-[#111] px-4 py-2.5 rounded-2xl hover:bg-stone-100/80 transition-all">03. Noivas Reais</a>
+                <a href="#section-journey-header" class="mobile-nav-link text-[15px] font-display font-medium text-[#1A1A1A] hover:text-[#111] px-4 py-2.5 rounded-2xl hover:bg-stone-100/80 transition-all">04. A História de um Vestido</a>
+                <a href="#section-about" class="mobile-nav-link text-[15px] font-display font-medium text-[#1A1A1A] hover:text-[#111] px-4 py-2.5 rounded-2xl hover:bg-stone-100/80 transition-all">05. Sobre Marília Ponte</a>
+                <a href="#section-faq" class="mobile-nav-link text-[15px] font-display font-medium text-[#1A1A1A] hover:text-[#111] px-4 py-2.5 rounded-2xl hover:bg-stone-100/80 transition-all">06. Dúvidas Frequentes</a>
+                <div class="pt-2 border-t border-stone-200/80 mt-1">
+                    <a href="#section-cta-final" class="mobile-nav-link flex items-center justify-center gap-2 w-full py-3 text-sm font-medium tracking-wide text-white bg-[#111] hover:bg-black rounded-full shadow-md transition-all">
+                        <span>Agendar atendimento</span>
+                        <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================================================================ -->
     <!-- SEÇÃO 1 — HERO (Preservada do index3.html)                      -->
     <!-- ================================================================ -->
-    <main class="hero-scrub-container relative bg-stone-50">
+    <main class="hero-scrub-container relative bg-stone-50" id="home">
         <div class="sticky top-0 h-screen w-full overflow-hidden">
 
             <!-- CANVAS CENTERPIECE (Image Sequence) -->
@@ -218,7 +297,7 @@
     <!-- ================================================================ -->
     <!-- SEÇÃO 2 — A DOR (Reconhecimento)                                -->
     <!-- ================================================================ -->
-    <section class="py-24 lg:py-40 relative overflow-hidden" id="section-pain" style="background-color:#FFFFFF">
+    <section class="py-24 lg:py-40 relative overflow-hidden scroll-mt-24 sm:scroll-mt-28" id="section-pain" style="background-color:#FFFFFF">
 
         <!-- Background Text -->
         <div class="absolute top-10 left-1/2 -translate-x-1/2 w-full text-center z-0 select-none pointer-events-none">
@@ -315,7 +394,7 @@
     <!-- ================================================================ -->
     <!-- SEÇÃO 3 — O MÉTODO (Quebra de objeção pelo processo)            -->
     <!-- ================================================================ -->
-    <section class="py-24 lg:py-40 relative overflow-hidden" id="section-method" style="background-color:#FFFFFF">
+    <section class="py-24 lg:py-40 relative overflow-hidden scroll-mt-24 sm:scroll-mt-28" id="section-method" style="background-color:#FFFFFF">
         
         <!-- Background Text -->
         <div class="absolute top-10 left-1/2 -translate-x-1/2 w-full text-center z-0 select-none pointer-events-none">
@@ -433,7 +512,7 @@
     <!-- ================================================================ -->
     <!-- SEÇÃO 4 — CARROSSEL DE CASES (Noivas)                           -->
     <!-- ================================================================ -->
-    <section class="py-24 lg:py-40 relative overflow-hidden" id="section-cases" style="background-color:#F8F9FA">
+    <section class="py-24 lg:py-40 relative overflow-hidden scroll-mt-24 sm:scroll-mt-28" id="section-cases" style="background-color:#F8F9FA">
         
         <!-- Background Text -->
         <div class="absolute top-10 left-1/2 -translate-x-1/2 w-full text-center z-0 select-none pointer-events-none">
@@ -558,7 +637,7 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 
-    <section class="py-24 lg:py-40 relative bg-white overflow-hidden" id="section-journey-header">
+    <section class="py-24 lg:py-40 relative bg-white overflow-hidden scroll-mt-24 sm:scroll-mt-28" id="section-journey-header">
         
         <!-- Background Text -->
         <div class="absolute top-10 left-1/2 -translate-x-1/2 w-full text-center z-0 select-none pointer-events-none">
@@ -719,7 +798,7 @@
     <!-- ================================================================ -->
     <!-- SEÇÃO 5 — SOBRE A MARÍLIA                                       -->
     <!-- ================================================================ -->
-    <section class="py-24 lg:py-40 relative overflow-hidden" id="section-about" style="background-color:#16202E">
+    <section class="py-24 lg:py-40 relative overflow-hidden scroll-mt-24 sm:scroll-mt-28" id="section-about" style="background-color:#16202E">
 
         <div class="max-w-[1440px] mx-auto px-6 md:px-24 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center">
@@ -805,7 +884,7 @@
     <!-- ================================================================ -->
     <!-- SEÇÃO 7 — FAQ (Objeções finais)                                 -->
     <!-- ================================================================ -->
-    <section class="py-24 lg:py-40 relative overflow-hidden" id="section-faq" style="background-color:#FFFFFF">
+    <section class="py-24 lg:py-40 relative overflow-hidden scroll-mt-24 sm:scroll-mt-28" id="section-faq" style="background-color:#FFFFFF">
 
         <div class="max-w-[800px] mx-auto px-6 md:px-12 relative z-10">
 
@@ -927,7 +1006,7 @@
     <!-- ================================================================ -->
     <!-- SEÇÃO 8 — CTA FINAL                                            -->
     <!-- ================================================================ -->
-    <section class="py-24 lg:py-40 relative overflow-hidden" id="section-cta-final" style="background-color:#16202E">
+    <section class="py-24 lg:py-40 relative overflow-hidden scroll-mt-24 sm:scroll-mt-28" id="section-cta-final" style="background-color:#16202E">
 
         <!-- Background Text -->
         <div class="absolute top-10 left-1/2 -translate-x-1/2 w-full text-center z-0 select-none pointer-events-none">
@@ -993,6 +1072,99 @@
                 item.classList.add('open');
             }
         }
+
+        // Floating Navbar Logic (ScrollSpy & Mobile Menu)
+        document.addEventListener("DOMContentLoaded", () => {
+            const navbar = document.getElementById('site-navbar');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            const toggleBtn = document.getElementById('mobile-nav-toggle');
+            const menu = document.getElementById('mobile-nav-menu');
+            const iconOpen = document.getElementById('nav-icon-open');
+            const iconClose = document.getElementById('nav-icon-close');
+
+            const sectionIds = [
+                'section-pain',
+                'section-method',
+                'section-cases',
+                'section-journey-header',
+                'section-about',
+                'section-faq'
+            ];
+
+            function onScrollNav() {
+                const scrollY = window.scrollY;
+                if (scrollY > 60) {
+                    navbar?.classList.add('nav-scrolled');
+                } else {
+                    navbar?.classList.remove('nav-scrolled');
+                }
+
+                const scrollPos = scrollY + 240;
+                let activeId = '';
+
+                for (let i = 0; i < sectionIds.length; i++) {
+                    const el = document.getElementById(sectionIds[i]);
+                    if (el) {
+                        const top = el.offsetTop;
+                        const height = el.offsetHeight;
+                        if (scrollPos >= top && scrollPos < top + height) {
+                            activeId = sectionIds[i];
+                            break;
+                        }
+                    }
+                }
+
+                navLinks.forEach(link => {
+                    const targetId = link.getAttribute('href')?.replace('#', '');
+                    if (targetId && targetId === activeId) {
+                        link.classList.add('active-nav');
+                    } else {
+                        link.classList.remove('active-nav');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', onScrollNav, { passive: true });
+            onScrollNav();
+
+            // Mobile Menu
+            if (toggleBtn && menu) {
+                function openMenu() {
+                    menu.classList.remove('hidden');
+                    requestAnimationFrame(() => {
+                        menu.classList.remove('opacity-0', '-translate-y-2');
+                        menu.classList.add('opacity-100', 'translate-y-0');
+                    });
+                    iconOpen?.classList.add('hidden');
+                    iconClose?.classList.remove('hidden');
+                }
+
+                function closeMenu() {
+                    menu.classList.remove('opacity-100', 'translate-y-0');
+                    menu.classList.add('opacity-0', '-translate-y-2');
+                    setTimeout(() => menu.classList.add('hidden'), 250);
+                    iconOpen?.classList.remove('hidden');
+                    iconClose?.classList.add('hidden');
+                }
+
+                toggleBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isClosed = menu.classList.contains('hidden');
+                    if (isClosed) openMenu(); else closeMenu();
+                });
+
+                mobileNavLinks.forEach(link => {
+                    link.addEventListener('click', closeMenu);
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!navbar?.contains(e.target) && !menu.classList.contains('hidden')) {
+                        closeMenu();
+                    }
+                });
+            }
+        });
 
         // Horizontal Scroll Journey Logic
         document.addEventListener("DOMContentLoaded", () => {
