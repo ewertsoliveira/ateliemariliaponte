@@ -284,7 +284,7 @@
     <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
         <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
         <img id="lightbox-img" src="" alt="Imagem ampliada" style="display:none;">
-        <video id="lightbox-video" src="" controls autoplay style="display:none;"></video>
+        <video id="lightbox-video" src="" controls autoplay muted playsinline style="display:none;"></video>
     </div>
 
     <!-- JS DO LIGHTBOX E VÍDEOS -->
@@ -297,6 +297,7 @@
             if (type === 'video') {
                 lightboxImg.style.display = 'none';
                 lightboxVideo.style.display = 'block';
+                lightboxVideo.muted = true;
                 lightboxVideo.src = src;
                 lightboxVideo.play();
             } else {
