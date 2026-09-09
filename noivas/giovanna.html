@@ -49,7 +49,8 @@
             display: flex;
             opacity: 1;
         }
-        .lightbox img {
+        .lightbox img,
+        .lightbox video {
             max-width: 90%;
             max-height: 90vh;
             border-radius: 8px;
@@ -57,7 +58,8 @@
             transform: scale(0.95);
             transition: transform 0.3s ease;
         }
-        .lightbox.active img {
+        .lightbox.active img,
+        .lightbox.active video {
             transform: scale(1);
         }
         .lightbox-close {
@@ -72,6 +74,32 @@
         }
         .lightbox-close:hover {
             transform: scale(1.1);
+        }
+
+        /* Video card play indicator */
+        .video-card .play-indicator {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(8px);
+            padding: 6px 12px;
+            border-radius: 999px;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            z-index: 5;
+            pointer-events: none;
+            opacity: 0.85;
+            transition: opacity 0.3s;
+        }
+        .video-card:hover .play-indicator {
+            opacity: 1;
         }
     </style>
 </head>
@@ -100,114 +128,193 @@
         </div>
     </section>
 
-    <!-- O Processo -->
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SEÇÃO 1 — MANEQUIM                          -->
+    <!-- ════════════════════════════════════════════ -->
     <section class="py-20 lg:py-24" style="background-color:#FFFFFF">
         <div class="max-w-[1200px] mx-auto px-6 md:px-12">
             <div class="inline-flex items-center gap-3 mb-10">
                 <span class="w-1.5 h-1.5 rounded-full" style="background-color:#74839C"></span>
-                <span class="text-xs font-mono uppercase tracking-[0.2em]" style="color:#74839C">O Processo</span>
+                <span class="text-xs font-mono uppercase tracking-[0.2em]" style="color:#74839C">O Manequim</span>
             </div>
             
             <div class="flex flex-col md:flex-row gap-6">
-                <!-- Imagem 1 -->
-                <div class="flex-1 group cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
+                <!-- Referência -->
+                <div class="flex-1 group cursor-pointer" onclick="openLightbox(this.querySelector('img').src, 'image')">
                     <div class="relative aspect-[3/4] overflow-hidden rounded-3xl bg-[#EAEAE5]">
-                        <img src="../assets/images/placeholder-vertical.jpg" alt="Noiva no ateliê" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <img src="giovanna-media/referencia-vestido.jpg" alt="Referência do vestido" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </div>
-                    <p class="mt-4 text-sm font-light text-center" style="color:#74839C">Primeira prova da base</p>
+                    <p class="mt-4 text-sm font-light text-center" style="color:#74839C">Referência</p>
                 </div>
-                <!-- Imagem 2 -->
-                <div class="flex-1 group cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
+                <!-- Manequim 1 -->
+                <div class="flex-1 group cursor-pointer" onclick="openLightbox(this.querySelector('img').src, 'image')">
                     <div class="relative aspect-[3/4] overflow-hidden rounded-3xl bg-[#EAEAE5]">
-                        <img src="../assets/images/placeholder-vertical.jpg" alt="Detalhe modelagem" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <img src="giovanna-media/manequim-1.jpg" alt="Vestido no manequim" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </div>
-                    <p class="mt-4 text-sm font-light text-center" style="color:#74839C">Ajuste fino no corpo</p>
+                    <p class="mt-4 text-sm font-light text-center" style="color:#74839C">Modelagem no manequim</p>
                 </div>
-                <!-- Imagem 3 -->
-                <div class="flex-1 group cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
+                <!-- Manequim 2 -->
+                <div class="flex-1 group cursor-pointer" onclick="openLightbox(this.querySelector('img').src, 'image')">
                     <div class="relative aspect-[3/4] overflow-hidden rounded-3xl bg-[#EAEAE5]">
-                        <img src="../assets/images/placeholder-vertical.jpg" alt="Acabamento" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <img src="giovanna-media/manequim-2.jpg" alt="Vestido no manequim — detalhe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </div>
-                    <p class="mt-4 text-sm font-light text-center" style="color:#74839C">Últimos detalhes</p>
+                    <p class="mt-4 text-sm font-light text-center" style="color:#74839C">Construção da silhueta</p>
+                </div>
+                <!-- Manequim 3 -->
+                <div class="flex-1 group cursor-pointer" onclick="openLightbox(this.querySelector('img').src, 'image')">
+                    <div class="relative aspect-[3/4] overflow-hidden rounded-3xl bg-[#EAEAE5]">
+                        <img src="giovanna-media/manequim-3.jpg" alt="Vestido no manequim — estrutura" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                    </div>
+                    <p class="mt-4 text-sm font-light text-center" style="color:#74839C">Estrutura da peça</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- O Dia -->
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SEÇÃO 2 — PROVA DE VESTIDO                  -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="py-20 lg:py-24" style="background-color:#F8F9FA">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-12">
+            <div class="inline-flex items-center gap-3 mb-10">
+                <span class="w-1.5 h-1.5 rounded-full" style="background-color:#74839C"></span>
+                <span class="text-xs font-mono uppercase tracking-[0.2em]" style="color:#74839C">Prova de Vestido</span>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-6">
+                <!-- Ajuste prova -->
+                <div class="flex-1 group cursor-pointer" onclick="openLightbox(this.querySelector('img').src, 'image')">
+                    <div class="relative aspect-[3/4] overflow-hidden rounded-3xl bg-[#EAEAE5]">
+                        <img src="giovanna-media/ajuste-vestido-prova.jpg" alt="Ajuste do vestido" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                    </div>
+                    <p class="mt-4 text-sm font-light text-center" style="color:#74839C">Primeira prova da base</p>
+                </div>
+                <!-- Ajuste prova 2 -->
+                <div class="flex-1 group cursor-pointer" onclick="openLightbox(this.querySelector('img').src, 'image')">
+                    <div class="relative aspect-[3/4] overflow-hidden rounded-3xl bg-[#EAEAE5]">
+                        <img src="giovanna-media/ajuste-vestido-prova-2.jpg" alt="Ajuste do vestido — detalhe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                    </div>
+                    <p class="mt-4 text-sm font-light text-center" style="color:#74839C">Ajuste fino no corpo</p>
+                </div>
+                <!-- Prova 3 -->
+                <div class="flex-1 group cursor-pointer" onclick="openLightbox(this.querySelector('img').src, 'image')">
+                    <div class="relative aspect-[3/4] overflow-hidden rounded-3xl bg-[#EAEAE5]">
+                        <img src="giovanna-media/giovanna-prova-3.jpg" alt="Giovanna na prova" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                    </div>
+                    <p class="mt-4 text-sm font-light text-center" style="color:#74839C">Vestido ganhando forma</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SEÇÃO 3 — PROVA FINAL                       -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="py-20 lg:py-24" style="background-color:#FFFFFF">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-12">
+            <div class="inline-flex items-center gap-3 mb-10">
+                <span class="w-1.5 h-1.5 rounded-full" style="background-color:#74839C"></span>
+                <span class="text-xs font-mono uppercase tracking-[0.2em]" style="color:#74839C">Prova Final</span>
+            </div>
+            
+            <!-- Masonry grid misturando fotos e vídeos -->
+            <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+
+
+                <!-- Vídeo: Inserindo alça -->
+                <div class="break-inside-avoid relative overflow-hidden rounded-3xl group cursor-pointer video-card" onclick="openLightbox('giovanna-media/inserindo-alca-prova-final.mp4', 'video')">
+                    <video src="giovanna-media/inserindo-alca-prova-final.mp4" muted loop playsinline preload="metadata" class="w-full h-auto bg-[#EAEAE5] group-hover:scale-105 transition-transform duration-700"
+                        onmouseenter="this.play()" onmouseleave="this.pause(); this.currentTime=0;"></video>
+                    <div class="play-indicator">
+                        <iconify-icon icon="solar:play-bold" style="font-size:14px"></iconify-icon>
+                        <span>Vídeo</span>
+                    </div>
+                </div>
+
+
+                <!-- Vídeo: Detalhe prova final -->
+                <div class="break-inside-avoid relative overflow-hidden rounded-3xl group cursor-pointer video-card" onclick="openLightbox('giovanna-media/detalhe-prova-final.mp4', 'video')">
+                    <video src="giovanna-media/detalhe-prova-final.mp4" muted loop playsinline preload="metadata" class="w-full h-auto bg-[#EAEAE5] group-hover:scale-105 transition-transform duration-700"
+                        onmouseenter="this.play()" onmouseleave="this.pause(); this.currentTime=0;"></video>
+                    <div class="play-indicator">
+                        <iconify-icon icon="solar:play-bold" style="font-size:14px"></iconify-icon>
+                        <span>Vídeo</span>
+                    </div>
+                </div>
+
+                <!-- Vídeo: Testando prova final -->
+                <div class="break-inside-avoid relative overflow-hidden rounded-3xl group cursor-pointer video-card" onclick="openLightbox('giovanna-media/testando-prova-final.mp4', 'video')">
+                    <video src="giovanna-media/testando-prova-final.mp4" muted loop playsinline preload="metadata" class="w-full h-auto bg-[#EAEAE5] group-hover:scale-105 transition-transform duration-700"
+                        onmouseenter="this.play()" onmouseleave="this.pause(); this.currentTime=0;"></video>
+                    <div class="play-indicator">
+                        <iconify-icon icon="solar:play-bold" style="font-size:14px"></iconify-icon>
+                        <span>Vídeo</span>
+                    </div>
+                </div>
+
+                <!-- Vídeo: Tiara prova final -->
+                <div class="break-inside-avoid relative overflow-hidden rounded-3xl group cursor-pointer video-card" onclick="openLightbox('giovanna-media/tiara-prova-final.mp4', 'video')">
+                    <video src="giovanna-media/tiara-prova-final.mp4" muted loop playsinline preload="metadata" class="w-full h-auto bg-[#EAEAE5] group-hover:scale-105 transition-transform duration-700"
+                        onmouseenter="this.play()" onmouseleave="this.pause(); this.currentTime=0;"></video>
+                    <div class="play-indicator">
+                        <iconify-icon icon="solar:play-bold" style="font-size:14px"></iconify-icon>
+                        <span>Vídeo</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SEÇÃO 4 — BUFFET (O Dia)                    -->
+    <!-- ════════════════════════════════════════════ -->
     <section class="py-20 lg:py-24" style="background-color:#F8F9FA">
         <div class="max-w-[1200px] mx-auto px-6 md:px-12">
             <div class="inline-flex items-center gap-3 mb-10">
                 <span class="w-1.5 h-1.5 rounded-full" style="background-color:#74839C"></span>
                 <span class="text-xs font-mono uppercase tracking-[0.2em]" style="color:#74839C">O Dia</span>
             </div>
-
-            <!-- Masonry Grid -->
+            
             <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-                <!-- Foto Vertical -->
-                <div class="break-inside-avoid relative overflow-hidden rounded-3xl group cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
-                    <img src="../assets/images/placeholder-vertical.jpg" class="w-full h-auto bg-[#EAEAE5] group-hover:scale-105 transition-transform duration-700" alt="Casamento 1">
+                <!-- Buffet 1 -->
+                <div class="break-inside-avoid relative overflow-hidden rounded-3xl group cursor-pointer" onclick="openLightbox(this.querySelector('img').src, 'image')">
+                    <img src="giovanna-media/buffet-1.jpg" class="w-full h-auto bg-[#EAEAE5] group-hover:scale-105 transition-transform duration-700" alt="Giovanna no buffet" loading="lazy">
                 </div>
-                <!-- Foto Horizontal -->
-                <div class="break-inside-avoid relative overflow-hidden rounded-3xl group cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
-                    <div class="aspect-[4/3]">
-                        <img src="../assets/images/placeholder-horizontal.jpg" class="w-full h-full object-cover bg-[#EAEAE5] group-hover:scale-105 transition-transform duration-700" alt="Casamento 2">
-                    </div>
+                <!-- Buffet 2 -->
+                <div class="break-inside-avoid relative overflow-hidden rounded-3xl group cursor-pointer" onclick="openLightbox(this.querySelector('img').src, 'image')">
+                    <img src="giovanna-media/buffet-2.jpg" class="w-full h-auto bg-[#EAEAE5] group-hover:scale-105 transition-transform duration-700" alt="Giovanna no buffet — momento" loading="lazy">
                 </div>
-                <!-- Foto Vertical -->
-                <div class="break-inside-avoid relative overflow-hidden rounded-3xl group cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
-                    <img src="../assets/images/placeholder-vertical.jpg" class="w-full h-auto bg-[#EAEAE5] group-hover:scale-105 transition-transform duration-700" alt="Casamento 3">
-                </div>
-                <!-- Foto Quadrada -->
-                <div class="break-inside-avoid relative overflow-hidden rounded-3xl group cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
-                    <div class="aspect-square">
-                        <img src="../assets/images/placeholder-square.jpg" class="w-full h-full object-cover bg-[#EAEAE5] group-hover:scale-105 transition-transform duration-700" alt="Casamento 4">
-                    </div>
-                </div>
-                <!-- Foto Horizontal -->
-                <div class="break-inside-avoid relative overflow-hidden rounded-3xl group cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
-                    <div class="aspect-[4/3]">
-                        <img src="../assets/images/placeholder-horizontal.jpg" class="w-full h-full object-cover bg-[#EAEAE5] group-hover:scale-105 transition-transform duration-700" alt="Casamento 5">
-                    </div>
-                </div>
-                <!-- Foto Vertical -->
-                <div class="break-inside-avoid relative overflow-hidden rounded-3xl group cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
-                    <img src="../assets/images/placeholder-vertical.jpg" class="w-full h-auto bg-[#EAEAE5] group-hover:scale-105 transition-transform duration-700" alt="Casamento 6">
+                <!-- Buffet 3 -->
+                <div class="break-inside-avoid relative overflow-hidden rounded-3xl group cursor-pointer" onclick="openLightbox(this.querySelector('img').src, 'image')">
+                    <img src="giovanna-media/buffet-3.jpg" class="w-full h-auto bg-[#EAEAE5] group-hover:scale-105 transition-transform duration-700" alt="Giovanna no buffet — celebração" loading="lazy">
                 </div>
             </div>
         </div>
     </section>
 
-            <!-- CTA Section -->
+    <!-- CTA Section -->
     <section class="py-24 lg:py-40 relative overflow-hidden scroll-mt-24 sm:scroll-mt-28" id="section-cta-final" style="background-color:#16202E">
-
-        <!-- Background Text -->
         <div class="absolute top-10 left-1/2 -translate-x-1/2 w-full text-center z-0 select-none pointer-events-none">
             <h2 class="font-display font-bold text-[5rem] sm:text-[8rem] lg:text-[14rem] tracking-tighter leading-none whitespace-nowrap" style="color:rgba(255,255,255,0.05)">
                 TRADUZIR
             </h2>
         </div>
-
         <div class="max-w-[800px] mx-auto px-6 md:px-12 relative z-10 text-center flex flex-col items-center">
-
             <div class="inline-flex items-center justify-center gap-3 mb-6 relative z-10">
                 <span class="w-1.5 h-1.5 rounded-full" style="background-color:#d8f0ff"></span>
                 <span class="text-xs font-mono uppercase tracking-[0.2em]" style="color:#d8f0ff">O COMEÇO</span>
             </div>
-
             <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1] mb-8 text-white relative z-10">
                 A sua noiva também já existe.
             </h2>
-
             <p class="text-[17px] leading-relaxed font-light mb-12 max-w-xl mx-auto" style="color:#C4CDD6">
                 Me conta sobre o seu casamento e a gente descobre juntas o caminho.
             </p>
-
             <a href="https://wa.me/5585999999999" target="_blank"
                 class="group relative inline-flex items-center gap-3 px-10 py-5 text-white overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color:#fff;border-radius:9999px;--tw-ring-offset-color:#1A1A1A">
                 <span class="relative z-10 text-[17px] font-medium tracking-wide" style="color:#1A1A1A">Agendar atendimento</span>
-                <iconify-icon icon="solar:arrow-right-linear"
-                    class="relative z-10 group-hover:translate-x-1 transition-transform" style="color:#1A1A1A"></iconify-icon>
+                <iconify-icon icon="solar:arrow-right-linear" class="relative z-10 group-hover:translate-x-1 transition-transform" style="color:#1A1A1A"></iconify-icon>
             </a>
         </div>
     </section>
@@ -223,27 +330,41 @@
         </div>
     </footer>
 
-    <!-- LIGHTBOX HTML -->
+    <!-- LIGHTBOX HTML (suporta imagem e vídeo) -->
     <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
         <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
-        <img id="lightbox-img" src="" alt="Imagem ampliada">
+        <img id="lightbox-img" src="" alt="Imagem ampliada" style="display:none;">
+        <video id="lightbox-video" src="" controls autoplay style="display:none;"></video>
     </div>
 
     <!-- JS DO LIGHTBOX -->
     <script>
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxVideo = document.getElementById('lightbox-video');
 
-        function openLightbox(src) {
-            lightboxImg.src = src;
+        function openLightbox(src, type) {
+            if (type === 'video') {
+                lightboxImg.style.display = 'none';
+                lightboxVideo.style.display = 'block';
+                lightboxVideo.src = src;
+                lightboxVideo.play();
+            } else {
+                lightboxVideo.style.display = 'none';
+                lightboxVideo.pause();
+                lightboxImg.style.display = 'block';
+                lightboxImg.src = src;
+            }
             lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevents scrolling
+            document.body.style.overflow = 'hidden';
         }
 
         function closeLightbox(event) {
             if (event.target === lightbox || event.target.className === 'lightbox-close') {
                 lightbox.classList.remove('active');
                 document.body.style.overflow = 'auto';
+                lightboxVideo.pause();
+                lightboxVideo.src = '';
             }
         }
         
@@ -253,6 +374,25 @@
                 closeLightbox({ target: lightbox });
             }
         });
+
+        // Autoplay videos on mobile when they scroll into view
+        if ('IntersectionObserver' in window) {
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const video = entry.target;
+                    if (entry.isIntersecting) {
+                        video.play().catch(() => {});
+                    } else {
+                        video.pause();
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            document.querySelectorAll('.video-card video').forEach(video => {
+                videoObserver.observe(video);
+            });
+        }
     </script>
+
 </body>
 </html>
