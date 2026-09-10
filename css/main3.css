@@ -29,6 +29,11 @@ body {
     filter: blur(0);
 }
 
+/* No Hero, o GSAP controla transform, opacity e filter — desativar transition CSS para não travar o scrub */
+.hero-scrub-container .reveal-up {
+    transition: none !important;
+}
+
 /* Container do Hero que permite a rolagem necessária para ativar o ScrollTrigger do Vídeo. 300vh = 3 telas mecânicas de distância. */
 .hero-scrub-container {
     height: 600vh;

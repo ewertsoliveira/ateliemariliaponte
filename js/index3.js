@@ -3,25 +3,54 @@ gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Lógica 01: Entradas Animadas instantâneas (apenas no container topo)
-    const heroReveals = document.querySelectorAll('.hero-scrub-container .reveal-up');
-    heroReveals.forEach((el, index) => {
-        setTimeout(() => { el.classList.add('active'); }, 100 + (100 * index));
+    // Lógica 01: Garantir que os elementos do Hero fiquem ativos e sem conflito de CSS transition
+    const heroElements = document.querySelectorAll('.hero-scrub-container .reveal-up, .hero-scrub-container .hero-fade');
+    heroElements.forEach((el) => {
+        el.classList.add('active');
+        el.style.transition = 'none'; // Impede que o transition do CSS brigue com o scrub do GSAP
     });
 
-    // Parallax Text Fading: Esvaece o texto do Hero enquanto o usuário começa a dar scroll
-    gsap.to(".hero-scrub-container .reveal-up, .hero-fade", {
-        y: -60,
-        opacity: 0,
-        filter: "blur(15px)",
-        stagger: 0.05,
-        scrollTrigger: {
-            trigger: ".hero-scrub-container",
-            start: "top top",
-            end: "15% top",
-            scrub: true
+    // Entrada suave no carregamento inicial (se estiver no topo)
+    if (window.scrollY < 60) {
+        gsap.fromTo(heroElements, 
+            {
+                y: 35,
+                opacity: 0,
+                filter: "blur(10px)"
+            },
+            {
+                y: 0,
+                opacity: 1,
+                filter: "blur(0px)",
+                duration: 1.1,
+                stagger: 0.1,
+                ease: "power2.out"
+            }
+        );
+    }
+
+    // Parallax Text Fading: Esvaece o texto do Hero ao rolar e GARANTE retorno ao subir ao topo
+    gsap.fromTo(heroElements, 
+        {
+            y: 0,
+            opacity: 1,
+            filter: "blur(0px)"
+        },
+        {
+            y: -60,
+            opacity: 0,
+            filter: "blur(15px)",
+            stagger: 0.04,
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".hero-scrub-container",
+                start: "top top",
+                end: "20% top",
+                scrub: true,
+                invalidateOnRefresh: true
+            }
         }
-    });
+    );
 
     // Lógica 03: Pinned Timeline interativa vertical (A Jornada)
     const journeyTl = gsap.timeline({
@@ -75,8 +104,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Gatilhos de Rolagem: Reveal-ups de outras seções (ex: segunda dobra) só acionam quando aparecem na tela
+    // Gatilhos de Rolagem: Reveal-ups de outras seções (excluindo hero) só acionam quando aparecem na tela
     gsap.utils.toArray('section .reveal-up').forEach(function (elem) {
+        if (elem.closest('.hero-scrub-container')) return;
         ScrollTrigger.create({
             trigger: elem,
             start: "top 85%",
