@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ========================================================================
     const FRAME_COUNT = 160;
     const FOLDER_PATH = "assets/sequencia/";
-    const FRAME_NAME = "Sequência 01";
+    const FRAME_NAME = "sequencia-";
     const FRAME_EXT = ".webp";
 
     // Resolução base que o vídeo original tinha
