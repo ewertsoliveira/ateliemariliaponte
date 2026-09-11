@@ -2,7 +2,10 @@
 <html class="scroll-smooth" lang="pt-BR">
 
 <head>
-    <!-- Google tag (gtag.js) -->
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <!-- Google tag (gtag.js) — Google Ads AW-18443361645 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18443361645"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -11,8 +14,26 @@
 
         gtag('config', 'AW-18443361645');
     </script>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1638763663796041');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" alt=""
+    src="https://www.facebook.com/tr?id=1638763663796041&amp;ev=PageView&amp;noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
+
     <title>Ateliê Marília Ponte | Vestidos de Noiva Sob Medida e Locação</title>
     <meta name="description"
         content="Da primeira conversa à última prova, eu te guio em cada escolha, até construir o vestido sob medida que traduz quem você é. Serviço premium de locação de vestidos de noiva." />
@@ -257,9 +278,21 @@
                 </canvas>
             </div>
 
+            <!-- SCRIM DE LEGIBILIDADE (somente mobile)
+                 O texto fica sobre o canvas, e o que passa atras dele muda
+                 durante o scroll (o panning vai de 63.5% a 78.5% e o zoom de
+                 1.4 a 1.0), alem de cada um dos 160 frames ter composicao
+                 propria. Nao existe enquadramento seguro fixo: a legibilidade
+                 so se resolve com uma camada entre a ilustracao e o texto.
+                 Degrade branco, opaco embaixo (onde o texto esta) e
+                 transparente em cima, preservando a ilustracao no topo. -->
+            <div class="hero-scrim absolute inset-x-0 bottom-0 h-[78%] z-[5] pointer-events-none md:hidden"
+                style="background:linear-gradient(to top, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.95) 32%, rgba(255,255,255,0.86) 52%, rgba(255,255,255,0.55) 74%, rgba(255,255,255,0) 100%)">
+            </div>
+
             <!-- OVERLAY CONTENT -->
             <div
-                class="relative z-10 w-full h-full max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 pointer-events-none items-end pb-24 max-h-[750px]:pb-0 md:pb-0 md:items-center h-screen ">
+                class="relative z-10 w-full h-full max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 pointer-events-none items-end pb-24 md:pb-0 md:items-center h-screen ">
 
                 <section
                     class="col-span-1 md:col-span-10 lg:col-span-7 flex flex-col z-10 text-left pointer-events-auto pl-4 max-[400px]:pl-10 pr-2 md:px-24 w-[95%] max-[400px]:w-[90%] max-[400px]:translate-y-4 md:w-full"

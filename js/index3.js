@@ -52,6 +52,30 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     );
 
+    // O scrim de legibilidade existe para servir o texto do Hero. A partir do
+    // momento em que o texto some, ele só atrapalharia — a proposta do Hero é
+    // ver a animação com nitidez. Some junto, na mesma curva de scroll, porém
+    // terminando um pouco depois (22% contra 20%): se saísse antes, o texto
+    // ficaria ilegível justamente no meio do próprio fade.
+    // Sem JS o scrim permanece visível, que é o estado seguro para leitura.
+    const heroScrim = document.querySelector('.hero-scrim');
+    if (heroScrim) {
+        gsap.fromTo(heroScrim,
+            { opacity: 1 },
+            {
+                opacity: 0,
+                ease: "power1.in",
+                scrollTrigger: {
+                    trigger: ".hero-scrub-container",
+                    start: "top top",
+                    end: "22% top",
+                    scrub: true,
+                    invalidateOnRefresh: true
+                }
+            }
+        );
+    }
+
     // Lógica 03: Pinned Timeline interativa vertical (A Jornada)
     const journeyTl = gsap.timeline({
         scrollTrigger: {
