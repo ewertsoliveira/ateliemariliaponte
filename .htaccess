@@ -4,6 +4,18 @@
 # servidor, o bloco é ignorado em vez de derrubar o site.
 # ============================================================
 
+# ------------------------------------------------------------
+# ORDEM DO ARQUIVO DE ÍNDICE
+# O dominio tem um WordPress residual instalado. A ordem padrao do
+# Apache coloca index.php antes de index.html, entao a raiz caia no
+# WordPress (que responde em branco) em vez do site. Esta linha inverte
+# a prioridade. Enquanto os arquivos do WordPress nao forem removidos,
+# NAO apague esta diretiva.
+# ------------------------------------------------------------
+<IfModule mod_dir.c>
+  DirectoryIndex index.html index.php index.htm
+</IfModule>
+
 # Charset padrão
 AddDefaultCharset UTF-8
 
