@@ -1,0 +1,86 @@
+# ============================================================
+# Ateliê Marília Ponte — configuração Apache (cPanel/TurboCloud)
+# Todos os blocos usam <IfModule>: se o módulo não existir no
+# servidor, o bloco é ignorado em vez de derrubar o site.
+# ============================================================
+
+# Charset padrão
+AddDefaultCharset UTF-8
+
+# Não listar o conteúdo de diretórios sem index
+Options -Indexes
+
+# ------------------------------------------------------------
+# Compressão — reduz HTML/CSS/JS em ~70%
+# (imagens WebP, JPG e vídeos já são comprimidos; não recomprimir)
+# ------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript text/javascript
+  AddOutputFilterByType DEFLATE application/json application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ------------------------------------------------------------
+# Cache do navegador
+# Os 160 frames da animação pesam ~13 MB: sem isto, são
+# rebaixados a cada visita em vez de virem do cache.
+# ------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Imagens e vídeos — 1 ano (têm nome estável)
+  ExpiresByType image/webp              "access plus 1 year"
+  ExpiresByType image/jpeg              "access plus 1 year"
+  ExpiresByType image/png               "access plus 1 year"
+  ExpiresByType image/svg+xml           "access plus 1 year"
+  ExpiresByType video/mp4               "access plus 1 year"
+
+  # Fontes — 1 ano
+  ExpiresByType font/woff2              "access plus 1 year"
+
+  # CSS e JS — 1 mês (mudam com mais frequência)
+  ExpiresByType text/css                "access plus 1 month"
+  ExpiresByType application/javascript  "access plus 1 month"
+  ExpiresByType text/javascript         "access plus 1 month"
+
+  # HTML — sempre revalidar, para que correções apareçam na hora
+  ExpiresByType text/html               "access plus 0 seconds"
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Reforça a revalidação do HTML
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+
+  # Assets versionados por nome: cache imutável
+  <FilesMatch "\.(webp|jpg|jpeg|png|svg|mp4|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Segurança básica
+  Header set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ------------------------------------------------------------
+# MIME types (a maioria dos servidores já traz; inofensivo repetir)
+# ------------------------------------------------------------
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType image/svg+xml .svg
+  AddType font/woff2 .woff2
+  AddType video/mp4 .mp4
+</IfModule>
+
+# ------------------------------------------------------------
+# HTTPS — ative SÓ se a TurboCloud ainda não estiver forçando.
+# Se o host já redireciona, isto pode criar loop de redirecionamento.
+# Para ativar, remova o # das quatro linhas abaixo.
+# ------------------------------------------------------------
+# <IfModule mod_rewrite.c>
+#   RewriteEngine On
+#   RewriteCond %{HTTPS} off
+#   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# </IfModule>
