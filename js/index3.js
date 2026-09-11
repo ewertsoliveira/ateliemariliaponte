@@ -135,39 +135,80 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.width = 1920;
     canvas.height = 1080;
 
-    const images = [];
+    const images = new Array(FRAME_COUNT);
     const proxy = { frame: 0 };
-    let loadedCount = 0;
+
+    function frameSrc(i) {
+        return `${FOLDER_PATH}${FRAME_NAME}${i.toString().padStart(3, '0')}${FRAME_EXT}`;
+    }
+
+    function isReady(img) {
+        return !!img && img.complete && img.naturalWidth > 0;
+    }
+
+    // Se o frame exato ainda não chegou, usa o carregado mais próximo.
+    // Assim o canvas mostra sempre algo coerente durante o scroll, em vez
+    // de congelar no último frame desenhado ou piscar em branco.
+    function pickFrame(i) {
+        if (isReady(images[i])) return images[i];
+        for (let d = 1; d < FRAME_COUNT; d++) {
+            if (isReady(images[i - d])) return images[i - d];
+            if (isReady(images[i + d])) return images[i + d];
+        }
+        return null;
+    }
 
     function render() {
-        const i = Math.round(proxy.frame);
-        if (images[i]) {
-            ctx.drawImage(images[i], 0, 0, canvas.width, canvas.height);
+        const img = pickFrame(Math.round(proxy.frame));
+        if (img) {
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
         }
     }
 
-    // Pré-carregamento dinâmico adaptado para os novos arquivos (000 até 143)
-    // Desenha o frame_001 imediatamente ao carregar a página (evita canvas branco)
-    const firstFrame = new Image();
-    firstFrame.src = `${FOLDER_PATH}${FRAME_NAME}000${FRAME_EXT}`;
-    firstFrame.onload = () => {
-        ctx.drawImage(firstFrame, 0, 0, canvas.width, canvas.height);
-    };
+    // ========================================================================
+    // CARREGAMENTO ESCALONADO DOS FRAMES
+    // Os 160 frames somam ~13 MB. Dispará-los de uma vez (como antes) satura
+    // a conexão e atrasa a primeira pintura no celular. Aqui carregamos
+    // primeiro o lote que o início do scroll realmente precisa e o restante
+    // só depois do load da página, com no máximo MAX_PARALLEL requisições
+    // simultâneas.
+    // ========================================================================
+    const EAGER_COUNT = 25;   // frames do croqui — aparecem logo no topo
+    const MAX_PARALLEL = 6;
 
-    for (let i = 0; i < FRAME_COUNT; i++) {
-        const img = new Image();
-        const frameNumber = i.toString().padStart(3, '0');
-        img.src = `${FOLDER_PATH}${FRAME_NAME}${frameNumber}${FRAME_EXT}`;
+    function loadFrame(i) {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.decoding = "async";
+            img.onload = () => {
+                if (i === 0) render();
+                resolve();
+            };
+            img.onerror = resolve;   // um frame ausente não trava a fila
+            img.src = frameSrc(i);
+            images[i] = img;
+        });
+    }
 
-        img.onload = () => {
-            loadedCount++;
-            // Desenha o primeiro quadro imediatamente para não mostrar fundo branco
-            if (i === 0) {
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    function loadRange(from, to) {
+        let next = from;
+        const worker = async () => {
+            while (next < to) {
+                await loadFrame(next++);
             }
         };
-        images.push(img);
+        return Promise.all(Array.from({ length: MAX_PARALLEL }, worker));
     }
+
+    loadRange(0, EAGER_COUNT).then(() => {
+        render();
+        const loadRest = () => loadRange(EAGER_COUNT, FRAME_COUNT);
+        if (document.readyState === "complete") {
+            loadRest();
+        } else {
+            window.addEventListener("load", loadRest, { once: true });
+        }
+    });
 
     // Ativa Motor GSAP Frame Perfect com mapeamento não-linear
     // Frames do croqui (0-24): recebem 70% do scroll → animação lenta e detalhada

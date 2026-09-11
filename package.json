@@ -4,7 +4,8 @@
   "description": "Bem-vindo ao repositório das páginas interativas da **Artools** e **Ateliê Marília Ponte**. Este projeto foi completamente refatorado para garantir máxima escalabilidade e organização, seguindo rigorosos padrões de \"production-ready deployments\".",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "tailwindcss -c tailwind.config.js -i build/tailwind-input.css -o css/tailwind.css --minify"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,8 @@
   "homepage": "https://github.com/ewertsoliveira/ateliemariliaponte#readme",
   "dependencies": {
     "heic-convert": "^2.1.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
   }
 }
