@@ -1,6 +1,41 @@
 // 1. Instanciar GSAP e ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
+/* ------------------------------------------------------------------
+   ABRIR A PÁGINA DIRETO NUMA ÂNCORA (ex.: /#section-cases)
+
+   A Jornada usa pin, e o pin insere um espaçador que muda a altura do
+   documento. Quando o navegador pula para a âncora ANTES do GSAP
+   inicializar, o pin acaba medido a partir de uma página já rolada e
+   nasce com offsets errados — as seções se sobrepõem e continuam
+   sobrepostas durante o scroll.
+
+   A ordem correta é: começar no topo, deixar o ScrollTrigger medir
+   tudo com o layout definitivo, e só então ir até a âncora.
+   ------------------------------------------------------------------ */
+var ancoraInicial = null;
+
+(function () {
+    var hash = window.location.hash;
+    if (!hash || hash === '#') return;
+
+    // Um hash arbitrario na URL pode ser um seletor invalido e derrubaria
+    // o script inteiro — junto com a animacao do Hero.
+    try {
+        if (!document.querySelector(hash)) return;
+    } catch (e) {
+        return;
+    }
+
+    ancoraInicial = hash;
+
+    // Sem isto o navegador reposiciona por conta propria no meio do caminho.
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+})();
+
 document.addEventListener("DOMContentLoaded", () => {
 
     // Lógica 01: Garantir que os elementos do Hero fiquem ativos e sem conflito de CSS transition
@@ -293,5 +328,40 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    
+
+    /* --------------------------------------------------------------
+       Recalcular as posições com o layout definitivo.
+
+       No 'load' as imagens, fontes e vídeos já entraram, então é o
+       momento em que as medidas param de mudar. O refresh reposiciona
+       todos os triggers — inclusive o pin da Jornada. Só depois disso
+       levamos a página até a âncora pedida, sem animação: o destino
+       precisa ser o ponto final, não um alvo em movimento.
+       -------------------------------------------------------------- */
+    window.addEventListener("load", () => {
+        ScrollTrigger.refresh();
+
+        if (!ancoraInicial) return;
+
+        const alvo = document.querySelector(ancoraInicial);
+        if (!alvo) return;
+
+        // Um quadro de folga para o refresh assentar antes de medir o alvo.
+        requestAnimationFrame(() => {
+            // O <html> tem scroll-smooth: sem desligar, este salto vira uma
+            // animação e o ScrollTrigger volta a medir um alvo em movimento.
+            const raiz = document.documentElement;
+            const comportamentoAnterior = raiz.style.scrollBehavior;
+            raiz.style.scrollBehavior = "auto";
+
+            alvo.scrollIntoView({ block: "start" });
+
+            raiz.style.scrollBehavior = comportamentoAnterior;
+
+            // O próprio deslocamento pode reordenar o que está pinado.
+            ScrollTrigger.refresh();
+            history.replaceState(null, "", ancoraInicial);
+        });
+    }, { once: true });
+
 });
