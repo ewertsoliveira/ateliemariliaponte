@@ -358,8 +358,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             raiz.style.scrollBehavior = comportamentoAnterior;
 
-            // O próprio deslocamento pode reordenar o que está pinado.
-            ScrollTrigger.refresh();
+            // Nada de refresh daqui para frente. Medido com a página já
+            // rolada, o elemento pinado está em position:fixed e devolve a
+            // posição errada: o start do pin saía deslocado pelo valor exato
+            // do scroll, ativando a Jornada por cima da seção das Noivas.
+            // O ScrollTrigger se acerta sozinho no scroll seguinte.
+            ScrollTrigger.update();
             history.replaceState(null, "", ancoraInicial);
         });
     }, { once: true });
